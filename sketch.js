@@ -43,25 +43,26 @@ gameState=PLAY;
   stroke("white");
   textSize("20")
  fill("white");
- survivalTime=Math.ceil(frameCount/frameRate());  
+
   
   stroke("black")
   textSize("20");
   fill("black");
  
-  text("survival time: " + survivalTime,100,50);
+
   monkey.collide(ground)
 
     if(gameState===PLAY){
 
   spawnBanana()
   spawnObstacles();
-
+survivalTime=Math.ceil(frameCount/frameRate());  text("survival time: " + survivalTime,100,50);   
 
       if(keyDown("space")&& monkey.y >= 300) {
         monkey.velocityY = -15;
     
     } 
+       
     monkey.velocityY = monkey.velocityY + 0.8
   ground.velocityX =-4
       if (ground.x < 0){
@@ -71,11 +72,13 @@ gameState=PLAY;
     }
   if(obstacleGroup.isTouching(monkey)){
     gameState=END;
+    
   }
   if(gameState===END){
-
+ text("survival time: ended " ,100,50);  
+  monkey.addAnimation("running",monkey_running);
     
-    
+     console.log("gameEnded")
 
     obstacleGroup.setLifetimeEach(-1);
     foodGroup.setLifetimeEach(-1);
